@@ -4,8 +4,8 @@ from fonctionPratiques import *
 import sys
 from time import time
 client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-ip='192.168.43.1'
-print('port :')
+ip=input('IP')
+print('PORT :')
 port=int(input())
 client.connect((ip,port))
 print('connecte')
