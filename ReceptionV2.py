@@ -25,13 +25,14 @@ else:
 		print('[*]En cours de reception...')
 		debut=time()
 		while(True):
-			recu=client.recv(16384)
-			tailleRecu=sys.getsizeof(fichier)
-			print('\r{}/{}'.format(tailleRecu,taille),end='')
-			if(recu==b'stop' or recu==b''):
-				fichier+=recu
-				break
-			fichier+=recu
+			for i in range(500):
+                                recu=client.recv(16384)
+                                tailleRecu=sys.getsizeof(fichier)
+                                if(recu==b'stop' or recu==b''):
+                                        fichier+=recu
+                                        break
+                                fichier+=recu
+                        print('\r{}/{}'.format(tailleRecu,taille),end='')
 		print('[*]Fin de la reception!')
 		print('vitesse: {} kB/s'.format(((time()-debut)/taille)/1024))
 		print(recu)
