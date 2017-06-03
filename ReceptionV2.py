@@ -26,7 +26,7 @@ else:
 		debut=time()
 		while(True):
 			for i in range(500):
-				recu=client.recv(16384)
+				recu=client.recv(1024*256)
 				tailleRecu=sys.getsizeof(fichier)
 				if(recu==b'stop' or recu==b''):
 					fichier+=recu
