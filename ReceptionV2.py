@@ -26,8 +26,8 @@ else:
 		debut=time()
 		while(True):
 			recu=client.recv(16384)
-			tailleRecu+=sys.getsizeof(recu)
-			print("\r",tailleRecu,'/',taille,': ',len(recu),end='')
+			tailleRecu=sys.getsizeof(fichier)
+			print('\r{}/{}'.format(tailleRecu,taille),end='')
 			if(recu==b'stop' or recu==b''):
 				fichier+=recu
 				break
