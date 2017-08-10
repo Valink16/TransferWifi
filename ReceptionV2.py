@@ -4,7 +4,7 @@ from fonctionPratiques import *
 import sys
 from time import time
 client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-ip=input('IP :')
+ip=input('IP:')
 print('PORT :')
 port=int(input())
 client.connect((ip,port))
@@ -26,14 +26,14 @@ else:
 		print('[*]En cours de reception...')
 		debut=time()
 		while(not(stop)):
-			for i in range(500):
-				recu=client.recv(1024*256)
-				tailleRecu=sys.getsizeof(fichier)
-				if(recu==b'stop' or recu==b''):
-					fichier+=recu
-					stop=True
-					break
+		
+			recu=client.recv(1024*256)
+			tailleRecu=sys.getsizeof(fichier)
+			if(recu==b'stop' or recu==b''):
 				fichier+=recu
+				stop=True
+				break
+			fichier+=recu
 			print('\r{}/{}'.format(tailleRecu,taille),end='')
 		print('[*]Fin de la reception!')
 		print('vitesse: {} kB/s'.format(((time()-debut)/taille)/1024))
