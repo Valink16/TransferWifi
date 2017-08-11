@@ -26,8 +26,8 @@ else:
 		print('[*]En cours de reception...')
 		debut=time()
 		while(not(stop)):
-		
-			recu=client.recv(1024*256)
+
+			recu=client.recv(taille)
 			tailleRecu=sys.getsizeof(fichier)
 			if(recu==b'stop' or recu==b''):
 				fichier+=recu
