@@ -35,8 +35,11 @@ else:
 				break
 			fichier+=recu
 			print('\r{}/{}'.format(tailleRecu,taille),end='')
+		print('\r{}/{}'.format(tailleRecu,taille))
 		print('[*]Fin de la reception!')
-		print('vitesse: {} kB/s'.format(((time()-debut)/taille)/1024))
+		duree=time()-debut
+		mult=float(1000/duree)
+		print('vitesse: {} B/s'.format((float(taille)/duree)/duree))
 		print(recu)
 		print(tailleRecu,'/',taille)
 
