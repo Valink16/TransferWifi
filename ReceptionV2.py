@@ -38,7 +38,7 @@ if(Rep1_0()==True):
 	print("Enter path for saving(enter # if you want to save {})".format(getcwd()))
 	chemin=input()
 	if (not(chemin=="#")):
-		os.chdir(chemin)
+		chdir(chemin)
 	print("Enter file name(without extension)")
 	nomFichier=input()+ext
 	with open(nomFichier,"wb") as file:
