@@ -1,69 +1,48 @@
 import socket
-import os
+from os import getcwd,chdir
 from fonctionPratiques import *
-import sys
+from sys import getsizeof
 from time import time
 client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 ip=input('IP:')
-print('PORT :')
-port=int(input())
+port=int(input("PORT:"))
 client.connect((ip,port))
-print('connecte')
-recu=client.recv(1024).decode()
+print('[*]Connected')
 fichier=bytes()
-if(recu=="N"):
-	print("[*]Annule par le serveur")
-
-else:
-	taille,ext=recu.split(',')
-	taille=int(taille)
-	tailleRecu=0
-	print("La taille du fichier {} a recevoir est de {} octets\nConfirmer?(o/N)".format(ext,taille))
-	reponse=input()
-	client.send(reponse.encode())
-	stop=False
-	if(reponse.upper()=='O'):
-		print('[*]En cours de reception...')
-		debut=time()
-		while(not(stop)):
-
-			recu=client.recv(taille)
-			tailleRecu=sys.getsizeof(fichier)
-			if(recu==b'stop' or recu==b''):
-				fichier+=recu
-				stop=True
-				break
-			fichier+=recu
-			print('\r{}/{}'.format(tailleRecu,taille),end='')
-		print('\r{}/{}'.format(tailleRecu,taille))
-		print('[*]Fin de la reception!')
-		duree=time()-debut
-		mult=float(1000/duree)
-		print('vitesse: {} B/s'.format((float(taille)/duree)/duree))
-		print(recu)
-		print(tailleRecu,'/',taille)
-
-print("[*]Termine")
-print("Afficher le contenu en texte?(illisible)(o/N)")
-
+recu=client.recv(1024).decode("utf-8")
+taille,ext=recu.split(',')
+taille=int(taille)
+tailleRecu=0
+print("The length of {} is {} bytes\n[*]Receiving...".format(ext,taille))
+stop=False
+debut=time()
+while(not(stop)):
+	recu=client.recv(taille)
+	tailleRecu=getsizeof(fichier)
+	if(recu==b'stop' or recu==b''):
+		fichier+=recu
+		break
+	fichier+=recu
+	print('\r{}/{}'.format(tailleRecu,taille),end='')
+print('\r{}/{}'.format(tailleRecu,taille))
+print('[*]All received !')
+duree=time()-debut
+print('Speed: {} B/s'.format(float(taille)/duree))
+print("Print received file?(may be unreadable)(o/N)")
 if(Rep1_0()==True):
 	print(fichier)
-
 else:
-	print("[*]Affichage de la reception annule")
-
-print("Enregistrer le fichier recu?")
-
+	print("[*]Not printing")
+print("Save reveived file?")
 if(Rep1_0()==True):
-	print("Entrez le chemin jusqu'au fichier a envoyer au client(# si dossier actuel)")
+	print("Enter path for saving(enter # if you want to save {})".format(os.getcwd()))
 	chemin=input()
 	if (not(chemin=="#")):
 		os.chdir(chemin)
-	print("Entrez le nom du fichier sans l'extension")
+	print("Enter file name(without extension)")
 	nomFichier=input()+ext
-
 	with open(nomFichier,"wb") as file:
 		file.write(fichier)
-		print("[*]Enregistrement termine")
-
+		print("[*]Saving done")
+print("[*]Bye !")
 client.close()
