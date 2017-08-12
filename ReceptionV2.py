@@ -35,7 +35,7 @@ else:
 	print("[*]Not printing")
 print("Save reveived file?")
 if(Rep1_0()==True):
-	print("Enter path for saving(enter # if you want to save {})".format(os.getcwd()))
+	print("Enter path for saving(enter # if you want to save {})".format(getcwd()))
 	chemin=input()
 	if (not(chemin=="#")):
 		os.chdir(chemin)
