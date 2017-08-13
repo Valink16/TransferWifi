@@ -16,15 +16,17 @@ tailleRecu=0
 print("The length of {} is {} bytes\n[*]Receiving...".format(ext,taille))
 stop=False
 debut=time()
+recCount=0
 while(not(stop)):
 	recu=client.recv(taille)
 	tailleRecu=getsizeof(fichier)
+	recCount+=1
 	if(recu==b'stop' or recu==b''):
 		fichier+=recu
 		break
 	fichier+=recu
 	print('\r{}/{}'.format(tailleRecu,taille),end='')
-print('\r{}/{}'.format(tailleRecu,taille))
+print('\r{}/{} in {} tries'.format(tailleRecu,taille,recCount))
 print('[*]All received !')
 duree=time()-debut
 print('Speed: {} B/s'.format(float(taille)/duree))
