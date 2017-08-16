@@ -75,8 +75,9 @@ def getIps(res): # Here we search for detected IPs on the local network in a loo
 				separatedIp=ip.split(".")
 				ip=""
 				for part in separatedIp:
-					ip+="."+part
-					ip=ip[1:]
+					ip+="."+str(part)
+
+				ip=ip[1:]
 				ipTab.append(ip)
 			except IndexError:
 				ipTab.append(nameCpy)
@@ -86,8 +87,16 @@ def getIps(res): # Here we search for detected IPs on the local network in a loo
 	return ChoiceTab,ipTab
 
 def getPort(ip,portRange):
-	res=my_nmap("-p "+portRange,ip,True)
-	print(res)
+	res=my_nmap("-p "+portRange,ip,False)
+	resTab=res.split("\n")
+	openPorts=[]
+	for lnumber,l in enumerate(resTab):
+		if(l.startswith("PORT")):
+			portStartLine=lnumber # We will use this in the next for loop
+			break
+
+	for portInfos in resTab[portStartLine:]:
+		print(portInfos)
 
 class loadingThread(Thread):
 	def __init__(self):
