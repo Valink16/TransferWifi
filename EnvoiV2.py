@@ -1,8 +1,9 @@
+import socket
+import os
+from time import sleep,time
+from sys import getsizeof
 def send():
-    import socket
-    import os
-    from time import sleep,time
-    from sys import getsizeof
+
     fichier=b''
     server=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     nomFichier=input("Enter file name:")

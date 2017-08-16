@@ -1,9 +1,10 @@
+import socket
+from os import getcwd,chdir
+from myLib import *
+from sys import getsizeof
+from time import time
 def recv():
-	import socket
-	from os import getcwd,chdir
-	from myLib import *
-	from sys import getsizeof
-	from time import time
+
 	client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 	loadThread=loadingThread()
 	broadcast=-1
