@@ -1,6 +1,6 @@
 from myLib import *
 import ReceptionV2,EnvoiV2
-print("Send or Receive ?: ")
+print("(S)end or (R)eceive ?: ")
 ch=input().upper()
 if(ch=="R"):
     ReceptionV2.recv()
