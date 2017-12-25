@@ -38,7 +38,7 @@ def recv():
 	debut=time()
 	recCount=0
 	while(not(stop)):
-		recu=client.recv(1024*1024)
+		recu=client.recv(10000)
 		tailleRecu=getsizeof(fichier)
 		recCount+=1
 		if(recu==b'stop' or recu==b''):
@@ -50,19 +50,18 @@ def recv():
 	print('[*]All received !')
 	duree=time()-debut
 	print('Speed: {} B/s'.format(float(taille)/duree))
-	if ask("Print received file?(may be unreadable)", "Y", "N"):
+	if ask("Print received file?(may be unreadable): ", "Y", "N"):
 		print(fichier)
 	else:
 		print("[*]Not printing")
 	
-	if ask("Save received file?", "Y", "N"):
-		print("Enter path for saving(# = {})".format(getcwd()))
+	if ask("Save received file?: ", "Y", "N"):
+		print("Enter path for saving(# = {}): ".format(getcwd()))
 		chemin=input()
 		if not chemin=="#":
 			chdir(chemin)
-			
-		print("Enter file name(without extension)")
-		nomFichier=input()+ext
+
+		nomFichier=input("Enter file name(without extension): ")+ext
 		with open(nomFichier,"wb") as file:
 			file.write(fichier)
 		print("[*]Saving done")
