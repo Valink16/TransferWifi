@@ -55,11 +55,12 @@ def recv():
 	else:
 		print("[*]Not printing")
 	
-	if ask("Save received file?", "Y", "N")==True):
+	if ask("Save received file?", "Y", "N"):
 		print("Enter path for saving(# = {})".format(getcwd()))
 		chemin=input()
-		if (not(chemin=="#")):
+		if not chemin=="#":
 			chdir(chemin)
+			
 		print("Enter file name(without extension)")
 		nomFichier=input()+ext
 		with open(nomFichier,"wb") as file:
