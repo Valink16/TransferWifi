@@ -2,18 +2,18 @@ import netifaces
 import subprocess
 from threading import Thread
 from time import sleep
-def Rep1_0():
+def ask(msg,pos,neg):
+	#simple neg or pos answer asking function
+	#args must be string type
 	loopInput=True
 	while(loopInput):
-		reponse=input()
-		if(reponse.upper()=="Y"):
-			loopInput=False
+		reponse=input(msg)
+		if(reponse.upper()==pos.upper()):
 			return True
-		elif(reponse.upper()=="N"):
-			loopInput=False
+		elif(reponse.upper()==neg.upper()):
 			return False
 		else:
-			print("enter 'y' for yes or 'n' for 'no'")
+			print("Enter {} or {}".format(pos,neg))
 
 def getBroadcast():
 	"""
@@ -64,7 +64,7 @@ def getIps(res): # Here we search for detected IPs on the local network in a loo
 	ChoiceTab=[]
 	ipTab=[]
 	for l in resTab:
-		if(l.startswith("Nmap scan report for")):
+		if(l.startswith("Nmap scan report for")): #What we search
 			name=l[21:]
 			nameCpy=name
 			try: #We handle an IndexError here *[*read down*]*

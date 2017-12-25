@@ -50,13 +50,12 @@ def recv():
 	print('[*]All received !')
 	duree=time()-debut
 	print('Speed: {} B/s'.format(float(taille)/duree))
-	print("Print received file?(may be unreadable)(o/N)")
-	if(Rep1_0()==True):
+	if ask("Print received file?(may be unreadable)", "Y", "N"):
 		print(fichier)
 	else:
 		print("[*]Not printing")
-	print("Save received file?")
-	if(Rep1_0()==True):
+	
+	if ask("Save received file?", "Y", "N")==True):
 		print("Enter path for saving(# = {})".format(getcwd()))
 		chemin=input()
 		if (not(chemin=="#")):
