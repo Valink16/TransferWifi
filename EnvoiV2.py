@@ -1,5 +1,6 @@
 import socket
 import os
+from myLib import log
 from time import sleep,time
 from sys import getsizeof
 def send():
