@@ -17,7 +17,7 @@ def send():
     server.listen(1)
     log("Listening")
     client, infos=server.accept()
-    log("Someone just connected himself\n{} :{}".format(infos[0], infos[1]))
+    log("Someone just connected\n{} :{}".format(infos[0], infos[1]))
     log("Length of opened file :{} bytes".format(getsizeof(fichier)))
     length=getsizeof(fichier)
     client.send((str(length)+','+ext).encode())
